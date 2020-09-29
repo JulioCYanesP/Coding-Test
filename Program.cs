@@ -72,10 +72,15 @@ namespace Coding_Test
                         //Will never enter here
                         break;
                 }
-                    
 
+                if (!checkPosition(width, height, currentPosition))
+                {
+                    Console.WriteLine("False");
+                    Environment.Exit(0);
+                }
+                    
             }
-            
+            Console.WriteLine("True," + getOrientationToChar(int_orientation)  + ",({0},{1})",currentPosition.Item1,currentPosition.Item2);
 
         }
 
@@ -96,7 +101,7 @@ namespace Coding_Test
             }
         }
 
-        private static int getOrientationToChar(int orientation)
+        private static char getOrientationToChar(int orientation)
         {
             switch (orientation)
             {
