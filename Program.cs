@@ -31,7 +31,7 @@ namespace Coding_Test
                 inputLine = Console.ReadLine();
                 inputs = inputLine.Split(' ');
 
-                if (!checkDimesions(inputs))                                   // Check for inputs errors
+                if (!checkDimensions(inputs))                                   // Check for inputs errors
                 {
                     Console.WriteLine("ERROR IN INPUT: Try again please. \n");
                     continue;
@@ -165,7 +165,7 @@ namespace Coding_Test
             return true;
         }
 
-        private static bool checkDimesions (string[] inputs)
+        private static bool checkDimensions (string[] inputs)
         {
             if (inputs.Length != 2 )
                 return false;
@@ -232,8 +232,6 @@ namespace Coding_Test
             }
             return true;
         }
-
-
         
     }
 }
