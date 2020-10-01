@@ -93,12 +93,16 @@ namespace Coding_Test
 
                 if (!checkPosition(width, height, currentPosition))
                 {
-                    Console.WriteLine("False");
+                    Console.WriteLine("False \n");
+                    Console.WriteLine("Press any key to exit...");
+                    Console.ReadKey();
                     Environment.Exit(0);
                 }
 
             }
-            Console.WriteLine("True," + getOrientationToChar(int_orientation) + ",({0},{1})", currentPosition[0], currentPosition[1]);
+            Console.WriteLine("True," + getOrientationToChar(int_orientation) + ",({0},{1}) \n", currentPosition[0], currentPosition[1]);
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
 
         }
 
