@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks.Dataflow;
-using System.Transactions;
 
 namespace Coding_Test
 {
@@ -43,7 +39,7 @@ namespace Coding_Test
                 Console.WriteLine("Enter coordinate and initial orientation");
                 Console.WriteLine("Examples:");
                 Console.WriteLine("0 0 N");
-                Console.WriteLine("1 2 S");
+                Console.WriteLine("1 2 S \n");
                 inputLine = Console.ReadLine();
                 inputs = inputLine.Split(' ');
                 if (!checkCoorAndOrientation(inputs, width,height))                                   // Check for inputs errors
