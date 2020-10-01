@@ -2,9 +2,9 @@
 
 namespace Coding_Test
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string inputLine;
             string[] inputs;
@@ -14,7 +14,7 @@ namespace Coding_Test
             int yInitialCoordinate;
             string commandLine;
             int int_orientation;
-            (int,int) currentPosition;
+            int[] currentPosition = new int[2];
 
             //User inputs
             while (true)
@@ -42,7 +42,7 @@ namespace Coding_Test
                 Console.WriteLine("1 2 S \n");
                 inputLine = Console.ReadLine();
                 inputs = inputLine.Split(' ');
-                if (!checkCoorAndOrientation(inputs, width,height))                                   // Check for inputs errors
+                if (!checkCoorAndOrientation(inputs, width, height))                                   // Check for inputs errors
                 {
                     Console.WriteLine("ERROR IN INPUT: Try again please. \n");
                     continue;
@@ -63,10 +63,12 @@ namespace Coding_Test
                 }
                 break;
             }
-            
+
             //Movement calculation
 
-            currentPosition = (xInitialCoordinate, yInitialCoordinate);
+            currentPosition[0] = xInitialCoordinate;
+            currentPosition[1] = yInitialCoordinate;
+
             foreach (char command in commandLine)
             {
                 switch (command)
@@ -94,9 +96,9 @@ namespace Coding_Test
                     Console.WriteLine("False");
                     Environment.Exit(0);
                 }
-                    
+
             }
-            Console.WriteLine("True," + getOrientationToChar(int_orientation)  + ",({0},{1})",currentPosition.Item1,currentPosition.Item2);
+            Console.WriteLine("True," + getOrientationToChar(int_orientation) + ",({0},{1})", currentPosition[0], currentPosition[1]);
 
         }
 
@@ -134,41 +136,46 @@ namespace Coding_Test
             }
         }
 
-        private static (int,int) advance(int orientation, (int,int) currentPosition)
+        private static int[] advance(int orientation, int[] currentPosition)
         {
-            switch(orientation)
+            switch (orientation)
             {
-                case 1:       // North                    
-                    return (currentPosition.Item1,currentPosition.Item2 + 1);
+                case 1:       // North
+                    currentPosition[1] += 1;
+                    return currentPosition;
                 case 2:       // East
-                    return (currentPosition.Item1 + 1 , currentPosition.Item2);
+                    currentPosition[0] += 1;
+                    return currentPosition;
                 case 3:       // South
-                    return (currentPosition.Item1, currentPosition.Item2 - 1);
+                    currentPosition[1] -= 1;
+                    return currentPosition;
                 case 4:       // West
-                    return (currentPosition.Item1 - 1, currentPosition.Item2);
+                    currentPosition[0] -= 1;
+                    return currentPosition;
                 default:
-                    return (-1,-1);
+                    return currentPosition;
             }
         }
 
-        private static bool checkPosition (int w, int h, (int,int) currentPostion)
+        private static bool checkPosition(int w, int h, int[] currentPostion)
         {
-            if (currentPostion.Item1 >= w || currentPostion.Item1 < 0)
+            if (currentPostion[0] >= w || currentPostion[0] < 0)
                 return false;
-            if (currentPostion.Item2 >= h || currentPostion.Item2 < 0)
+            if (currentPostion[1] >= h || currentPostion[1] < 0)
                 return false;
 
             return true;
         }
 
-        private static bool checkDimensions (string[] inputs)
+        private static bool checkDimensions(string[] inputs)
         {
-            if (inputs.Length != 2 )
+            int output;
+            if (inputs.Length != 2)
                 return false;
 
             foreach (string input in inputs)
             {
-                if (int.TryParse(input, out int output))
+                if (int.TryParse(input, out output))
                 {
                     if (output < 0)
                         return false;
@@ -181,14 +188,16 @@ namespace Coding_Test
             return true;
         }
 
-        private static bool checkCoorAndOrientation(string[] inputs,int w, int h)
+        private static bool checkCoorAndOrientation(string[] inputs, int w, int h)
         {
+            int output;
+            int output2;
             if (inputs.Length > 3)
                 return false;
 
-            for  (int i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++)
             {
-                if (int.TryParse(inputs[i], out int output))
+                if (int.TryParse(inputs[i], out output))
                 {
                     if (output < 0 && output < w && output < h)
                         return false;
@@ -200,8 +209,8 @@ namespace Coding_Test
             }
 
             // Test third argument (N,W,S,E)
-            if (int.TryParse(inputs[2], out int output2))
-            { 
+            if (int.TryParse(inputs[2], out output2))
+            {
                 return false;
             }
             else
@@ -224,10 +233,10 @@ namespace Coding_Test
                 {
                     return false;
                 }
-                
+
             }
             return true;
         }
-        
+
     }
 }
